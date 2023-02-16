@@ -1,5 +1,6 @@
 from math import sqrt
 from typing import List
+from collections import Counter
 
 Vector = List[float]
 
@@ -17,3 +18,9 @@ def variance(v: Vector) -> float:
 def standard_deviation(v: Vector) -> float:
     """Calculates standard deviation of vector."""
     return sqrt(variance(v))
+
+
+def mode(x: List[str]) -> str:
+    """Returns mode of set."""
+    cnt = Counter(x)
+    return cnt.most_common(1)[0][0]
