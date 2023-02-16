@@ -3,6 +3,7 @@ from Patient import Patient
 from typing import List, Tuple
 from constants import FEATURES_NO
 from linear_algebra import Vector, vector_mean, vector_stdev
+from random import shuffle
 
 
 def parse_data(data: pd.DataFrame) -> List[Patient]:
@@ -40,3 +41,11 @@ def rescale(data: List[Patient]) -> List[Patient]:
     rescaled_data = [Patient(rescaled[i], data[i].label) for i in range(len(data))]
 
     return rescaled_data
+
+
+def split_data(data: List[Patient], split: float) -> Tuple[List[Patient], List[Patient]]:
+    """Splits the dataset into test set and train set."""
+    dataset = data.copy()
+    shuffle(dataset)
+    split_idx = int(split * len(dataset))
+    return dataset[:split_idx], dataset[split_idx:]
